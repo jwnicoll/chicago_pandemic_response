@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chicago's Response to the Pandemic</title>
+        <link rel="stylesheet" type="text/css" href="{% static "/main.css" %}" />
+    </head>
+    <body>
+        <div id="header">
+            <h1>Chicago's Response to the Pandemic</h1>
+        </div>
+        <div class="frame">
+            <form method="get">
+                {% csrf_token %}
+                <table class="form">
+                {{ form }}
+                </table>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+
+        {% if args %}
+        <div class="args">
+            <pre>{{ args }}</pre>
+        </div>
+        {% endif %}
+
+        {% if err %}
+        <div class="error">
+            {{ err|safe }}
+        </div>
+        {% endif %}
+
+
+
+        <div class="frame">
+            <table class="courses">
+                <tr>
+                    {% for col in columns %}
+                    <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th><img src="{% static 'Cat_1.jpg'%}" alt=""></th>
+                    <th><img src="{% static 'Cat_2.jpg'%}" alt=""></th>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

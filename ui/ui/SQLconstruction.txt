@@ -1,0 +1,69 @@
+File containing the SQL commands used in the SQL interactive shell to construct
+the database from csv files in csv_files directory. Not meant to be run again since
+the database is already constructed, but merely to show procedure.
+
+CREATE TABLE tests_deaths_vacs_zip (Zip_Code integer, Date VARCHAR(12), Percent_Vacc_Series_Completed float, Cases_Cumulative float, Tests_Cumulative integer, [Percent Tested Positive - Cumulative] float, Deaths integer, Population integer, Cases_Percent float, Tests_Percent float, Deaths_Percent float);
+.separator ,
+.import ../data_files/csv_files/Cumulative_Cases_Tests_Deaths_Vacs_Zip_percapita.csv tests_deaths_vacs_zip
+
+CREATE TABLE hospital_beds (Zip_Code integer, [ICU Beds] integer, [Medical and Surgical Beds] integer);
+.separator ,
+.import ../data_files/csv_files/hospital_beds_by_zip.csv' hospital_beds
+
+CREATE TABLE income (Percent_less_10000 float, median_income integer, mean_income integer, Zip_Code integer);
+.separator ,
+.import ../data_files/csv_files/income_by_zips.csv income
+
+CREATE TABLE opioid_deaths (Zip_Code integer, pre_opioid_count integer, post_opioid_count integer);
+.separator ,
+.import ../data_files/csv_files/opioids_deaths.csv' opioid_deaths
+
+CREATE TABLE suicide_deaths (Zip_Code integer, pre_suicide_count integer, post_suicide_count integer);
+.separator ,
+.import ../data_files/csv_files/suicide_deaths.csv suicide_deaths
+
+CREATE TABLE uninsured (Zip_Code integer, population integer, percent_uninsured float);
+.separator ,
+.import ../data_files/csv_files/pop_and_uninsured_zips.csv uninsured
+
+CREATE TABLE test_sites (Zip_Code integer, site_count integer);
+.separator ,
+.import ../data_files/csv_files/test_sites_by_zip.csv test_sites
+
+CREATE TABLE therapists (Zip_Code integer, number integer); 
+.separator ,
+.import ../data_files/csv_files/therapists_by_zip.csv therapists
+
+CREATE TABLE healthworkers (Zip_Code integer, [Total Doses - Cumulative] integer, [Vaccine Series Completed - Cumulative] integer, [Total Workers] integer, Population integer, percent_healthworkers float);
+.separator ,
+.import ../data_files/csv_files/vaccinations_and_healthcare_workers.csv healthworkers
+
+CREATE TABLE location (Zip_Code integer, latitude float, longitude float);
+.separator ,
+.import ../data_files/csv_files/zip_location_key.csv location
+
+CREATE TABLE ages (median_age float, age_dependency_ratio float, oldage_dependency_ratio float, [percent_65+] float, Zip_Code integer);
+.separator ,
+.import ../data_files/csv_files/ages_by_zip.csv ages
+
+CREATE TABLE physicians (Zip_Code int, number int);
+.separator ,
+.import ../data_files/csv_files/Physicians_Counts.csv physicians
+
+#In order to get rid of first row, which is just the header from
+#the csv files.
+#Used the following source for this:
+#https://stackoverflow.com/questions/13587314/sqlite3-import-csv-exclude-skip-header
+
+DELETE FROM healthworkers WHERE "Zip_Code" == 'Zip_Code';
+DELETE FROM hospital_beds WHERE "Zip_Code" == 'Zip_Code';
+DELETE FROM income WHERE "Zip_Code" == 'Zip_Code';
+DELETE FROM location WHERE "Zip_Code" == 'Zip_Code';
+DELETE FROM opioid_deaths WHERE "Zip_Code" == 'Zip_Code';
+DELETE FROM suicide_deaths WHERE "Zip_Code" == 'Zip_Code';
+DELETE FROM physicians WHERE "Zip_Code" == 'Zip_Code';
+DELETE FROM test_sites WHERE "Zip_Code" == 'Zip_Code';
+DELETE FROM test_deaths_vacs_zip WHERE "Zip_Code" == 'Zip_Code';
+DELETE FROM therapists WHERE "Zip_Code" == 'Zip_Code';
+DELETE FROM uninsured WHERE "Zip_Code" == 'Zip_Code';
+
