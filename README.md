@@ -1,7 +1,5 @@
 CS122 Chicagos Response to the Pandemic Group Project
 
-CS 122 Project Proposal.pdf     -- Project proposal document
-
 ui                              -- THE PROGRAM IS RUN FROM THIS DIRECTORY. TO
                                    ACCESS THE WEBSITE, PLEASE GO HERE.
                                    Instructions are provided there in a README.
